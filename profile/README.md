@@ -1,6 +1,6 @@
 # oxide-sloc
 
-**IEEE 1045-1992 compliant source line counter — CLI, web UI, HTML/PDF reports, and CI/CD integration. Built in Rust.**
+**Source line counter — CLI, web UI, git history browsing, HTML/PDF reports, and CI/CD integration. Built in Rust.**
 
 [![CI](https://github.com/oxide-sloc/oxide-sloc/actions/workflows/ci.yml/badge.svg)](https://github.com/oxide-sloc/oxide-sloc/actions/workflows/ci.yml)
 [![Latest Release](https://img.shields.io/github/v/release/oxide-sloc/oxide-sloc?label=release)](https://github.com/oxide-sloc/oxide-sloc/releases/latest)
@@ -17,7 +17,7 @@ Most SLOC tools count total lines or blank-stripped lines. oxide-sloc lets you c
 | Capability | Details |
 |---|---|
 | **Languages** | 41 supported — Rust, C/C++, Python, Go, TypeScript, Java, and more |
-| **Interfaces** | CLI / localhost web UI / embeddable summary widget |
+| **Interfaces** | CLI / localhost web UI / git browser / embeddable summary widget |
 | **Output formats** | Plain text / JSON / HTML / PDF / CSV / XLSX |
 | **IEEE compliance** | Continuation-line policy / blank-in-block-comment policy / compiler-directive tracking |
 | **CI/CD** | GitHub Actions / GitLab CI / Jenkins / Docker / Bitbucket Pipelines |
@@ -30,6 +30,8 @@ Most SLOC tools count total lines or blank-stripped lines. oxide-sloc lets you c
 - **Standard-backed counts.** Results are reproducible and citable — not "lines minus blanks."
 - **No runtime dependency.** Single static binary. No Python, no Node, no JVM.
 - **Web UI included.** Point it at a directory, get an interactive HTML report in the browser.
+- **Git history browsing built in.** Browse branches, tags, and commits of any remote repo directly from the web UI — scan any ref or compare two refs without a separate checkout step.
+- **Automated scanning.** Webhook receivers for GitHub, GitLab, and Bitbucket dispatch scans on push; poll schedules keep results up to date between events.
 - **PDF export built in.** Requires a locally installed Chromium-based browser; no cloud calls.
 - **CI-native.** Structured JSON output, exit codes, and Docker image for easy pipeline integration.
 - **AGPL-licensed.** Free to use, study, and modify.
@@ -56,6 +58,10 @@ bash run.sh          # starts the web UI at http://127.0.0.1:4317
 oxide-sloc analyze ./my-repo --plain
 oxide-sloc analyze ./my-repo --html-out report.html --pdf-out report.pdf
 oxide-sloc analyze ./my-repo --json-out result.json
+
+# Scan or compare any git ref without a local checkout
+oxide-sloc git-scan  https://github.com/org/repo main
+oxide-sloc git-compare https://github.com/org/repo v1.3.0 v1.4.0
 ```
 
 ---
